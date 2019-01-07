@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Hello World!</title>
-      <link>/hello-world/</link>
+      <title>Hello!</title>
+      <link>/hello/</link>
       <pubDate>Sun, 06 Jan 2019 19:24:49 +0100</pubDate>
       
-      <guid>/hello-world/</guid>
-      <description>&lt;p&gt;Hello, &lt;strong&gt;Developer Marbles&lt;/strong&gt; is a place where we share ideas, knowledge and stuggles -share them- with the developer community.&lt;/p&gt;</description>
+      <guid>/hello/</guid>
+      <description>&lt;p&gt;Hello, &lt;strong&gt;Developer Marbles&lt;/strong&gt; is a place where we share ideas, knowledge and struggles -share them- with the developer community.&lt;/p&gt;</description>
     </item>
     
   </channel>
