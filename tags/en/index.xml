@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>En on </title>
+    <link>/tags/en/</link>
+    <description>Recent content in En on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Sun, 06 Jan 2019 19:24:49 +0100</lastBuildDate>
+    
+	<atom:link href="/tags/en/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hello World!</title>
+      <link>/hello-world/</link>
+      <pubDate>Sun, 06 Jan 2019 19:24:49 +0100</pubDate>
+      
+      <guid>/hello-world/</guid>
+      <description>&lt;p&gt;Hello, &lt;strong&gt;Developer Marbles&lt;/strong&gt; is a place where we share ideas, knowledge and stuggles -share them- with the developer community.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
