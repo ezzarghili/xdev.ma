@@ -17,9 +17,7 @@
       <pubDate>Mon, 07 Jan 2019 20:00:43 +0100</pubDate>
       
       <guid>/free-private-repositories-from-github/</guid>
-      <description>Today&amp;rsquo;s tech news is coming from Github with their new announcement of free unlimited private repositories, fellowing the steps of Bitbucket and gitlab, there is one limitation though which is you can have up to only three collaborators in the project.
-More details can be found here: Github blog post
-Some may think that this could be the end of other platforms (i.e: gitlab?), but this may not be the case, for instance gitlab offer more than just and SCM for managing the code, they provide CI (which im my opnition is one of the best out there), and for companies which most use the self-hosted version of gitlab this may not be news at all, mainly due to the three collaborator limitation part.</description>
+      <description>&lt;p&gt;Today&amp;rsquo;s tech news is coming from &lt;strong&gt;Github&lt;/strong&gt; with their new announcement of free unlimited private repositories, fellowing the steps of &lt;strong&gt;Bitbucket&lt;/strong&gt; and &lt;strong&gt;gitlab&lt;/strong&gt;, there is one limitation though which is you can have up to only three collaborators in the project.&lt;/p&gt;</description>
     </item>
     
   </channel>
