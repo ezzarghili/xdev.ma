@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nodev on </title>
-    <link>/tags/nodev/</link>
+    <link>https://xdev.ma/tags/nodev/</link>
     <description>Recent content in Nodev on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 06 Jan 2019 19:24:49 +0100</lastBuildDate>
     
-	<atom:link href="/tags/nodev/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://xdev.ma/tags/nodev/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hello!</title>
-      <link>/hello/</link>
+      <link>https://xdev.ma/hello/</link>
       <pubDate>Sun, 06 Jan 2019 19:24:49 +0100</pubDate>
       
-      <guid>/hello/</guid>
+      <guid>https://xdev.ma/hello/</guid>
       <description>&lt;p&gt;Hello, &lt;strong&gt;Developer Marbles&lt;/strong&gt; is a place where we share ideas, knowledge and struggles -share them- with the developer community.&lt;/p&gt;</description>
     </item>
     
