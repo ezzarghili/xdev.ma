@@ -7,7 +7,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 06 Jan 2019 19:24:49 +0100</lastBuildDate>
-    <atom:link href="https://xdev.ma/tags/nodev/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://xdev.ma/tags/nodev/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Hello!</title>
@@ -15,12 +17,7 @@
       <pubDate>Sun, 06 Jan 2019 19:24:49 +0100</pubDate>
       
       <guid>https://xdev.ma/hello/</guid>
-      <description>&lt;p&gt;Hello, &lt;strong&gt;Developer Marbles&lt;/strong&gt; is a place where we share ideas, knowledge and struggles -share them- with the developer community.&lt;/p&gt;
-
-&lt;p&gt;The content is multilingual (mainly English) and submittions are welcome.&lt;/p&gt;
-
-&lt;p&gt;We share contents using different mediums including articles, videos, code and others.&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;Hello, &lt;strong&gt;Developer Marbles&lt;/strong&gt; is a place where we share ideas, knowledge and struggles -share them- with the developer community.&lt;/p&gt;</description>
     </item>
     
   </channel>

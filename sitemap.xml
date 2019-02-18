@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <url>
-    <loc>https://xdev.ma/</loc>
-    <lastmod>2019-01-07T20:00:43+01:00</lastmod>
-    <priority>0</priority>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://xdev.ma/free-private-repositories-from-github/</loc>
@@ -15,6 +10,71 @@
   <url>
     <loc>https://xdev.ma/hello/</loc>
     <lastmod>2019-01-06T19:24:49+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://xdev.ma/</loc>
+    <lastmod>2019-01-07T20:00:43+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xdev.ma/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xdev.ma/tags/en/</loc>
+    <lastmod>2019-01-06T19:24:49+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xdev.ma/tags/free/</loc>
+    <lastmod>2019-01-07T20:00:43+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xdev.ma/tags/git/</loc>
+    <lastmod>2019-01-07T20:00:43+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xdev.ma/tags/github/</loc>
+    <lastmod>2019-01-07T20:00:43+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xdev.ma/categories/news/</loc>
+    <lastmod>2019-01-07T20:00:43+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xdev.ma/tags/news/</loc>
+    <lastmod>2019-01-07T20:00:43+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xdev.ma/tags/nodev/</loc>
+    <lastmod>2019-01-06T19:24:49+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xdev.ma/post/</loc>
+    <lastmod>2019-01-07T20:00:43+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xdev.ma/tags/</loc>
+    <lastmod>2019-01-06T19:24:49+01:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>

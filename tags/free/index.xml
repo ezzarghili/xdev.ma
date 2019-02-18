@@ -7,7 +7,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Mon, 07 Jan 2019 20:00:43 +0100</lastBuildDate>
-    <atom:link href="https://xdev.ma/tags/free/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://xdev.ma/tags/free/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Free private repositories from GitHub!</title>
@@ -15,16 +17,7 @@
       <pubDate>Mon, 07 Jan 2019 20:00:43 +0100</pubDate>
       
       <guid>https://xdev.ma/free-private-repositories-from-github/</guid>
-      <description>&lt;p&gt;Today&amp;rsquo;s tech news is coming from &lt;strong&gt;Github&lt;/strong&gt; with their new announcement of free unlimited private repositories, fellowing the steps of &lt;strong&gt;Bitbucket&lt;/strong&gt; and &lt;strong&gt;gitlab&lt;/strong&gt;, there is one limitation though which is you can have up to only three collaborators in the project.&lt;/p&gt;
-
-&lt;p&gt;More details can be found here: &lt;a href=&#34;https://blog.github.com/2019-01-07-new-year-new-github/&#34;&gt;Github blog post&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Some may think that this could be the end of other platforms (i.e: gitlab?), but this may not be the case, for instance gitlab offer more than just an SCM for managing the code, they provide CI (which in my opnition is one of the best out there), and for companies which most use the self-hosted version of gitlab this may not be news at all, mainly due to the three collaborator limitation part.&lt;/p&gt;
-
-&lt;p&gt;An other limitation of the offer is being directed at personal account repositories, so no free private organization repositories.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;EDIT:&lt;/strong&gt; Gitlab published a blog comparing it&amp;rsquo;s offering to Github&amp;rsquo;s one &lt;a href=&#34;https://about.gitlab.com/2019/01/07/github-offering-free-private-repos-for-up-to-three-collaborators/&#34;&gt;details&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;Today&amp;rsquo;s tech news is coming from &lt;strong&gt;Github&lt;/strong&gt; with their new announcement of free unlimited private repositories, fellowing the steps of &lt;strong&gt;Bitbucket&lt;/strong&gt; and &lt;strong&gt;gitlab&lt;/strong&gt;, there is one limitation though which is you can have up to only three collaborators in the project.&lt;/p&gt;</description>
     </item>
     
   </channel>
