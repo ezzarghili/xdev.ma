@@ -1,0 +1,59 @@
+baseurl         = "https://xdev.ma/"
+theme           = "casper-two"
+languageCode    = "en-US"
+disqusShortname = ""
+paginate        = 6
+#SectionPagesMenu = "main"
+
+[params]
+  title       = "Developer Marbles"
+  subtitle    = "Sharing with simplicity in mind"
+  logo = "/img/xdevma.png"
+
+  cover       = "img/xdevma_black_cover.jpg"
+  description = "Developer Marbles's blog: Sharing with simplicity in mind."
+  metaDescription = ""
+  googleAnalytics = ""
+  customCSS = []
+  RSSLink = ""
+
+  fbName = "groups/developer.marbles"
+  githubName = "xdevma"
+
+  #orgName = "XORTECH"
+  #orgWebsite = "https://xor.ma"
+  #orgDescription = "Extensible Knowledge"
+
+  author = "ezzarghili"
+  authorAvatar = "/img/profile.gif"
+  authorLocation = "Benslimane, Morocco"
+  authorWebsite = "https://ezmo.org"
+  authorDescription = "A passionate software engineer 👨🏻‍💻"
+
+  pageNotFoundTitle = "404 - Page not found"
+
+  #casper or caspertwo
+  singleViewStyle = "casper"
+
+[permalinks]
+  post = "/:slug/"
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 200
+
+#[[menu.main]]
+#  name = "Go"
+#  url = "/tags/golang/"
+#  weight = 100
+
+#[[menu.main]]
+# name = "Videos"
+#  url = "/categories/video/"
+#  weight = 99
+
+#[[menu.main]]
+#  name = "XDevMa"
+#  url = "https://xdev.ma/"
+#  weight = 95
