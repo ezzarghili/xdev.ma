@@ -5,7 +5,7 @@ branches:
 
 before_script:
   - wget https://github.com/gohugoio/hugo/releases/download/v0.54.0/hugo_0.54.0_Linux-64bit.deb
-  - sudo dpkg -i hugo_0.54_Linux-64bit.deb
+  - sudo dpkg -i hugo_0.54.0_Linux-64bit.deb
   - rm -rf public 2> /dev/null
 
 script:
