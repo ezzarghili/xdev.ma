@@ -7,19 +7,19 @@ paginate        = 6
 pygmentsCodeFences = true
 pygmentsCodeFencesGuessSyntax = true
 [params]
-  title       = "Developer Marbles"
+  title       = "X Developer Marbles"
   subtitle    = "Sharing with simplicity in mind"
   logo = "/img/xdevma.png"
 
   cover       = "img/xdevma_black_cover.jpg"
-  description = "Developer Marbles's blog: Sharing with simplicity in mind."
+  description = "X Developer Marbles's blog: Sharing with simplicity in mind."
   metaDescription = ""
   googleAnalytics = ""
   customCSS = []
   RSSLink = ""
 
-  fbName = "groups/developer.marbles"
-  githubName = "xdevma"
+  fbName = "mohamed.ezzarghili"
+  githubName = "ezzarghili"
 
   #orgName = "XORTECH"
   #orgWebsite = "https://xor.ma"
@@ -28,7 +28,7 @@ pygmentsCodeFencesGuessSyntax = true
   author = "ezzarghili"
   authorAvatar = "/img/profile.gif"
   authorLocation = "Benslimane, Morocco"
-  authorWebsite = "https://ezmo.org"
+  authorWebsite = "https://xdev.ma"
   authorDescription = "A passionate software engineer 👨🏻‍💻"
 
   pageNotFoundTitle = "404 - Page not found"

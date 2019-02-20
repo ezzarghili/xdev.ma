@@ -164,7 +164,7 @@ Now that we have built and compressed our app binary, the next step is to create
 
 We will use the smallest docker image available to us `scratch` as our app doesn't have any external dependencies.
 
-Also the fact the app is a web-service we will need to export the app port, so it can be discoverd and be available to the host.
+Also the fact the app is a web-service we will need to export the app port, so it can be discovered and be available to the host.
 
 Here is the simplest `dockerfile` for the the image
 
@@ -187,7 +187,7 @@ docker build -t slim-go-image .
 And run it likewise, make sure to map the container port to a host port
 
 ```bash
-docker run -p 3000:300 slim-go-image .
+docker run -p 3000:3000 slim-go-image .
 ```
 
 Let's check the size of our Docker image
