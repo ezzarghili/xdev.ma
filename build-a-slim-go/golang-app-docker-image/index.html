@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en-US" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Build a slim Go/Golang app docker image &middot; </title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://xdev.ma/favicon.ico" />
+    <link rel="canonical" href="https://xdev.ma/build-a-slim-go/golang-app-docker-image/" />
+
+     <meta name="description" content="&lt;p&gt;Docker images can sometimes take a lot of space, if one of your concerns is the image size, and that can be for many reasons: not enough disk space, limited " /> 
+
+     
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="https://xdev.ma/img/resources/golang-docker-slim.jpg"/>
+    
+ 
+    <meta name="twitter:title" content="Build a slim Go/Golang app docker image"/>
+    <meta name="twitter:description" content="&lt;p&gt;Docker images can sometimes take a lot of space, if one of your concerns is the image size, and that can be for many reasons: not enough disk space, limited "/>
+    <meta name="twitter:url" content="https://xdev.ma/build-a-slim-go/golang-app-docker-image/" />
+    <meta name="twitter:site" content="@"/>
+
+    <meta property="og:site_name" content="" />
+    <meta property="og:title" content="Build a slim Go/Golang app docker image &middot; Developer Marbles" />
+    <meta property="og:url" content="https://xdev.ma/build-a-slim-go/golang-app-docker-image/" />
+    <meta property="article:publisher" content="https://www.facebook.com/groups/developer.marbles" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="&lt;p&gt;Docker images can sometimes take a lot of space, if one of your concerns is the image size, and that can be for many reasons: not enough disk space, limited " />
+
+    <meta property="article:published_time" content="2019-02-20T18:33:27&#43;01:00" />
+    <meta property="article:tag" content="golang" /><meta property="article:tag" content="go" /><meta property="article:tag" content="docker" /><meta property="article:tag" content="slim" />
+
+    <meta property="og:image" content="https://xdev.ma/img/resources/golang-docker-slim.jpg"/>
+
+
+    <meta name="generator" content="Hugo 0.54.0" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="https://xdev.ma/built/screen.css" /> 
+    <link rel="stylesheet" type="text/css" href="https://xdev.ma/css/casper-two.css" /> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" />
+    
+
+     
+
+</head>
+
+
+<body class="post-template">
+  <div class="site-wrapper"> 
+
+<header class="site-header outer">
+  <div class="inner">
+    <nav class="site-nav">
+      <div class="site-nav-left">
+        <a class="site-nav-logo" href="#"><img src="https://xdev.ma/img/xdevma.png" alt="Developer Marbles" /></a>
+
+        <ul class="nav" role="menu">
+        
+        
+        
+            <li class="" role="menuitem">
+              <a href="/">Home</a>
+            </li>
+        
+      </ul></div>
+
+      <div class="site-nav-right">
+        <div class="social-links">
+                    <a class="social-link social-link-fb" href="https://www.facebook.com/groups/developer.marbles" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg></a>
+
+                    
+
+                    <a class="social-link" href="https://github.com/xdevma" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+
+                    
+
+                    
+        </div>  
+            
+      </div>
+
+    </nav>  
+
+  </div>
+</header>
+
+<main id="site-main" class="site-main outer" role="main">
+  <div class="inner">
+    
+      <article class="post-full post"> 
+    <header class="post-full-header">
+        <section class="post-full-meta">
+            <time class="post-full-meta-date" datetime="2019-02-20">20 February 2019</time>
+                <span class="date-divider">/</span> <a href="https://xdev.ma/tags/golang/">#golang</a>&nbsp;<a href="https://xdev.ma/tags/go/">#go</a>&nbsp;
+        </section>
+        <h1 class="post-full-title">Build a slim Go/Golang app docker image</h1>
+    
+        
+    
+    <p>Reading time: 6 minutes</p>
+    </header>
+    
+    <figure class="post-full-image" style="background-image: url(https://xdev.ma/img/resources/golang-docker-slim.jpg)">
+    </figure>
+
+    <section class="post-full-content">
+        <div class="kg-card-markdown">
+        <p>Docker images can sometimes take a lot of space, if one of your concerns is the image size, and that can be for many reasons: not enough disk space, limited bandwidth or just a slow speed connection.</p>
+
+<p>In this post we will go through the process of creating a slim Docker image hosting a web service developed in Golang, some parts are applicable to other languages generating similar executables.</p>
+
+<p>The steps for this will be</p>
+
+<ul>
+<li>Build a statically compiled binary with no external dependecies</li>
+<li>Compress the executable generated to reduce the size more</li>
+<li>Use a small base docker image, in this case we will go with <code>scratch</code></li>
+</ul>
+
+<h2 id="creating-a-simple-go-app">Creating a simple Go app</h2>
+
+<p>First we should start by creating our app, not being the focus of this post we will create the simplest app we can.</p>
+
+<p>A good fit is a simple web-service with a single endpoint that accepts an http GET request with a parameter <code>name</code> and return a string <code>&quot;Hello $name&quot;</code> or just <code>&quot;Hello world&quot;</code> if none are set.</p>
+
+<p>For example</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl http://localhost:3000/?name<span style="color:#f92672">=</span>Ahmed</code></pre></div>
+<p>Will return</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Hello Ahmed</code></pre></div>
+<p>Here is the code that will be using for this</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+  <span style="color:#e6db74">&#34;fmt&#34;</span>
+  <span style="color:#e6db74">&#34;net/http&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+  <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#a6e22e">hello</span>)
+  <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:3000&#34;</span>, <span style="color:#66d9ef">nil</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">hello</span>(<span style="color:#a6e22e">resp</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">req</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+  <span style="color:#a6e22e">names</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">Query</span>()[<span style="color:#e6db74">&#34;name&#34;</span>]
+  <span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> <span style="color:#f92672">||</span> len(<span style="color:#a6e22e">names</span>[<span style="color:#ae81ff">0</span>]) &lt; <span style="color:#ae81ff">1</span> {
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprint</span>(<span style="color:#a6e22e">resp</span>, <span style="color:#e6db74">&#34;Hello world&#34;</span>)
+    <span style="color:#66d9ef">return</span>
+  }
+  <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">resp</span>, <span style="color:#e6db74">&#34;Hello %s&#34;</span>, <span style="color:#a6e22e">names</span>[<span style="color:#ae81ff">0</span>])
+}</code></pre></div>
+<h2 id="building-the-app">Building the app</h2>
+
+<p>First let&rsquo;s go over the steps that we want to do, as our main target is a linux based docker container we will need to cross compile the app if we are in macos/windows, these are the steps</p>
+
+<ul>
+<li>build a static binary</li>
+<li>rely on go networking instead of using the system&rsquo;s</li>
+</ul>
+
+<p>Now that we have the app code what we need is to generate a static binary, with <code>go build</code> this is an easy task, the only thing you should make sure of is the target platform, if you&rsquo;re on a mac for example, as you know docker containers are based on <strong>linux</strong>, so a build for <strong>darwin</strong> will not run inside the container, but this is easily achievable by setting the environment variable <code>GOOS</code> to the value <code>linux</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">GOOS<span style="color:#f92672">=</span>linux go build -o app.bin app.go</code></pre></div>
+<p>But to make sure that our binary is totally static and doesn&rsquo;t have external dependencies, we would have needed to add some flags to the build, like <code>netgo</code> to make sure that the binary is using Go own resolvers instead of relying on the system&rsquo;s, thankfully it&rsquo;s no longer necessary to do as of Go <strong>v1.5</strong> on <em>Unix</em> systems (<em>windows</em>, <em>macos</em> and <em>Plan9</em> do still need this), the fact that our main target is linux(docker container) we don&rsquo;t need to add this flag.</p>
+
+<p>What we can do though is set <code>--ldflags</code> <code>-extldflags &quot;-static&quot;</code> to tell the linker to statically compile the dependencies inside the binary.</p>
+
+<p>Run the command</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">GOOS<span style="color:#f92672">=</span>linux go build --ldflags <span style="color:#e6db74">&#39;-extldflags &#34;-static&#34;&#39;</span> -o app.static.bin app.go</code></pre></div>
+<h2 id="build-a-smaller-app-binary">Build a smaller app binary</h2>
+
+<p>Now that we have cross compiled the app and generated an executable binary, let&rsquo;s do a quick check to the size of all the generated binaries.</p>
+
+<p>Run the command</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -lh</code></pre></div>
+<p>On my machine this shows</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-output" data-lang="output">-rwxr-xr-x  1 ezzarghili  staff   6.2M Feb 20 19:14 app.static.bin</code></pre></div>
+<p>Now our main goal it reduce the size of the statically compiled binary, the build flag <code>--ldflags</code> accept some really usefull args that will help us achieve this goal, these are <code>-s -w</code> which allow for stripping symbols table and dwarf data (debug info, <em>The end of the article will have more information this</em>) from the binary file.</p>
+
+<p>Run the command</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">GOOS<span style="color:#f92672">=</span>linux go build --ldflags <span style="color:#e6db74">&#39;-extldflags &#34;-static&#34; -s -w&#39;</span> -o app.static.small.bin app.go</code></pre></div>
+<p>Let&rsquo;s now check the size of the new genareted binary file</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -lh</code></pre></div>
+<p>My output</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">-rwxr-xr-x  1 ezzarghili  staff   6.2M Feb 20 19:14 app.static.bin
+<span style="display:block;width:100%;background-color:#3c3d38">-rwxr-xr-x  1 ezzarghili  staff   4.6M Feb 20 19:15 app.static.small.bin</span></code></pre></div>
+
+<p>As you can see we were able to reduce the size of the binary generate by roughly ~25% by just using go build flags.</p>
+
+<h2 id="reduce-the-size-even-more">Reduce the size even more</h2>
+
+<p>If we believe that the results we got from the build are still not super satisfactory we can go further by using a really cool tool <code>upx</code> the <strong>Ultimate Packer for eXecutables</strong>.</p>
+
+<p>Download the tool here <a href="https://github.com/upx/upx/releases">github release for upx</a>, or you can build it from source if no binary is available for your platform (<em>for mac users there is a homebrew formula for upx</em>)</p>
+
+<p>Run the command bellow (-9 is the best compression level, you can use others)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">upx -9 -o app.static.small.upx.bin app.static.small.bin</code></pre></div>
+<p>Output</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">        File size         Ratio      Format      Name
+   --------------------   ------   -----------   -----------
+   4822080 -&gt;   1821876   37.78%   linux/amd64   app.static.small.upx.bin</code></pre></div>
+<p>Let&rsquo;s check again the size of the generated binaries.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -lh</code></pre></div>
+<p>Ouputs</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"><span style="display:block;width:100%;background-color:#3c3d38">-rwxr-xr-x  1 ezzarghili  staff   6.2M Feb 20 19:14 app.static.bin
+</span>-rwxr-xr-x  1 ezzarghili  staff   4.6M Feb 20 19:15 app.static.small.bin
+<span style="display:block;width:100%;background-color:#3c3d38">-rwxr-xr-x  1 ezzarghili  staff   1.7M Feb 20 19:15 app.static.small.upx.bin</span></code></pre></div>
+
+<p>Now we got the initial size of our app roughly <strong>~72%</strong> down!! we can now move on.</p>
+
+<h2 id="create-a-docker-image">Create a docker image</h2>
+
+<p>Now that we have built and compressed our app binary, the next step is to create our docker image hosting the app.</p>
+
+<p>We will use the smallest docker image available to us <code>scratch</code> as our app doesn&rsquo;t have any external dependencies.</p>
+
+<p>Also the fact the app is a web-service we will need to export the app port, so it can be discoverd and be available to the host.</p>
+
+<p>Here is the simplest <code>dockerfile</code> for the the image</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> scratch</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>COPY <span style="color:#f92672">[</span> <span style="color:#e6db74">&#39;app.static.small.upx.bin&#39;</span>, <span style="color:#e6db74">&#39;app.bin&#39;</span> <span style="color:#f92672">]</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 3000</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span><span style="color:#e6db74"> [ &#34;./app.bin&#34; ]</span></code></pre></div>
+<p>We can build the docker image as usual</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker build -t slim-go-image .</code></pre></div>
+<p>And run it likewise, make sure to map the container port to a host port</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -p <span style="color:#ae81ff">3000</span>:300 slim-go-image .</code></pre></div>
+<p>Let&rsquo;s check the size of our Docker image</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker image inspect --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{{.Size}}&#39;</span> slim-go-image</code></pre></div>
+<p>Outputs</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">1821876</code></pre></div>
+<p>Voila, our docker image size is roughly around <strong>1.82MB</strong></p>
+
+<h2 id="last-words-considerations">Last words, considerations</h2>
+
+<p>It goes without saying that this process should be automated in CI/CD pipeline, also the use of the ldflags <code>-s -w</code> will have some side effect on the binary, although this will not affect how the app is executed.</p>
+
+<p><code>-s</code> will disable symbol table which means that you longer can use external tools to look at binary symbol table or lookup functions, for example <code>go tool nm</code> will just output something like</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">reading app.static.small.bin: no symbol section
+reading app.static.small.bin: no symbols</code></pre></div>
+<p><code>-w</code> will disable DWARF generation, meaning you no long will be able use debug information with tools like <code>gdb</code> to debug the binary or <code>pprof</code> to profile it, or any other tool that depends on this information be availble in the binary.</p>
+
+<p>Thank you for reading looking forward to write my next post :)</p>    
+        </div>
+    </section>
+
+    <footer class="post-full-footer">
+      <section class="author-card">
+        <img class="author-profile-image" src="https://xdev.ma/img/profile.gif" alt="Author" />
+        <section class="author-card-content">
+            <h4 class="author-card-name"><a href="https://xdev.ma/">ezzarghili</a></h4>
+                <p>A passionate software engineer 👨🏻‍💻</p>
+        </section>
+      </section>
+    </footer>
+</article>
+    
+    
+    
+
+  </div>
+</main>
+
+
+<aside class="read-next outer">
+  <div class="inner">
+    <div class="read-next-feed">      
+      
+
+      
+      
+      <article class="post-card post"> 
+    
+    <a class="post-card-image-link" href="https://xdev.ma/free-private-repositories-from-github/">
+      <div class="post-card-image" style="background-image: url(https://xdev.ma/img/resources/github.jpg)"></div>
+    </a>
+    
+
+    <div class="post-card-content">
+      <a class="post-card-content-link" href="https://xdev.ma/free-private-repositories-from-github/">
+          <header class="post-card-header">
+              <span class="post-card-tags">
+              #news 
+              #git 
+              #github 
+              #free  </span>
+              
+              <h2 class="post-card-title">Free private repositories from GitHub!</h2>
+          </header>
+          <section class="post-card-excerpt">
+              
+                <p>Today&rsquo;s tech news is coming from Github with their new announcement of free unlimited private repositories, fellowing the steps of Bitbucket and gitlab, there is one limitation though which is you can have up to only three collaborators in the project.
+ ...  </p>
+              
+          </section>
+      </a>
+
+      <footer class="post-card-meta">
+          <img class="author-profile-image" src="https://xdev.ma/img/profile.gif" alt="Author" />
+          <span class="post-card-author"><a href="/">ezzarghili</a></span>
+      </footer>
+    </div>
+</article>
+      
+    </div>
+  </div>
+</aside>
+
+<div class="floating-header">
+  <div class="floating-header-logo">
+    <a href="https://xdev.ma/">
+      <img src="https://xdev.ma/img/xdevma.png" alt="" />
+      <span></span>
+    </a>
+  </div>
+  <span class="floating-header-divider">&mdash;</span>
+  <div class="floating-header-title">Build a slim Go/Golang app docker image</div>
+  <div class="floating-header-share">
+    <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/></svg>
+    </div>
+    
+    <a class="floating-header-share-tw" href="https://twitter.com/share?text=Build%20a%20slim%20Go%2fGolang%20app%20docker%20image&amp;url=https%3a%2f%2fxdev.ma%2fbuild-a-slim-go%2fgolang-app-docker-image%2f"
+          onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+      </a>
+      <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fxdev.ma%2fbuild-a-slim-go%2fgolang-app-docker-image%2f"
+          onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+      </a>
+  </div>
+
+  <progress class="progress" value="0">
+    <div class="progress-container">
+      <span class="progress-bar"></span>
+    </div>
+  </progress>
+</div>
+
+
+
+<footer class="site-footer outer">
+  <div class="site-footer-content inner">
+    <section class="copyright" style="line-height: 1.3em;">
+      <a href="/"></a>  <br>
+      
+    </section>
+    <nav class="site-footer-nav">
+        <a href="/">Latest Posts</a>
+        <a href="https://www.facebook.com/groups/developer.marbles" target="_blank" rel="noopener">Facebook</a>
+        
+        <a href="https://github.com/xdevma" target="_blank" rel="noopener">Github</a>
+        
+        
+    </nav>  
+  </div>
+</footer>
+
+</div>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://xdev.ma/js/jquery.fitvids.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    <script>
+
+
+
+
+
+$(document).ready(function () {
+    
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+</body></html>

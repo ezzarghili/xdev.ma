@@ -6,10 +6,21 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 07 Jan 2019 20:00:43 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 20 Feb 2019 18:33:27 +0100</lastBuildDate>
     
 	<atom:link href="https://xdev.ma/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Build a slim Go/Golang app docker image</title>
+      <link>https://xdev.ma/build-a-slim-go/golang-app-docker-image/</link>
+      <pubDate>Wed, 20 Feb 2019 18:33:27 +0100</pubDate>
+      
+      <guid>https://xdev.ma/build-a-slim-go/golang-app-docker-image/</guid>
+      <description>&lt;p&gt;Docker images can sometimes take a lot of space, if one of your concerns is the image size, and that can be for many reasons: not enough disk space, limited bandwidth or just a slow speed connection.&lt;/p&gt;
+
+&lt;p&gt;In this post we will go through the process of creating a slim Docker image hosting a web service developed in Golang, some parts are applicable to other languages generating similar executables.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Free private repositories from GitHub!</title>

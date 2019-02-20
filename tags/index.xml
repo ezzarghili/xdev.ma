@@ -6,10 +6,19 @@
     <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 06 Jan 2019 19:24:49 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 20 Feb 2019 18:33:27 +0100</lastBuildDate>
     
 	<atom:link href="https://xdev.ma/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker</title>
+      <link>https://xdev.ma/tags/docker/</link>
+      <pubDate>Wed, 20 Feb 2019 18:33:27 +0100</pubDate>
+      
+      <guid>https://xdev.ma/tags/docker/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>En</title>
@@ -48,6 +57,24 @@
     </item>
     
     <item>
+      <title>Go</title>
+      <link>https://xdev.ma/tags/go/</link>
+      <pubDate>Wed, 20 Feb 2019 18:33:27 +0100</pubDate>
+      
+      <guid>https://xdev.ma/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>https://xdev.ma/tags/golang/</link>
+      <pubDate>Wed, 20 Feb 2019 18:33:27 +0100</pubDate>
+      
+      <guid>https://xdev.ma/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>News</title>
       <link>https://xdev.ma/tags/news/</link>
       <pubDate>Mon, 07 Jan 2019 20:00:43 +0100</pubDate>
@@ -62,6 +89,15 @@
       <pubDate>Sun, 06 Jan 2019 19:24:49 +0100</pubDate>
       
       <guid>https://xdev.ma/tags/nodev/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Slim</title>
+      <link>https://xdev.ma/tags/slim/</link>
+      <pubDate>Wed, 20 Feb 2019 18:33:27 +0100</pubDate>
+      
+      <guid>https://xdev.ma/tags/slim/</guid>
       <description></description>
     </item>
     
