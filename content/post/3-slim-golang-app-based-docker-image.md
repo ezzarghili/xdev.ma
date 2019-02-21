@@ -107,7 +107,7 @@ Run the command
 GOOS=linux go build --ldflags '-extldflags "-static" -s -w' -o app.static.small.bin app.go
 ```
 
-Let's now check the size of the new genareted binary file
+Let's now check the size of the new generated binary file
 
 ```bash
 ls -lh
