@@ -119,8 +119,8 @@
 <p>The steps for this will be</p>
 
 <ul>
-<li>Build a statically compiled binary with no external dependecies</li>
-<li>Compress the executable generated to reduce the size more</li>
+<li>Build a statically compiled binary with no external dependencies</li>
+<li>Compress the binary generated to reduce the size</li>
 <li>Use a small base docker image, in this case we will go with <code>scratch</code></li>
 </ul>
 
@@ -128,7 +128,7 @@
 
 <p>First we should start by creating our app, not being the focus of this post we will create the simplest app we can.</p>
 
-<p>A good fit is a simple web-service with a single endpoint that accepts an http GET request with a parameter <code>name</code> and return a string <code>&quot;Hello $name&quot;</code> or just <code>&quot;Hello world&quot;</code> if none are set.</p>
+<p>A good fit is a simple web-service with a single endpoint that accepts an http GET request with a parameter <code>name</code> and return a text <code>&quot;Hello $name&quot;</code> or just <code>&quot;Hello world&quot;</code> if none are set.</p>
 
 <p>For example</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl http://localhost:3000/?name<span style="color:#f92672">=</span>Ahmed</code></pre></div>
@@ -160,33 +160,33 @@
 <p>First let&rsquo;s go over the steps that we want to do, as our main target is a linux based docker container we will need to cross compile the app if we are in macos/windows, these are the steps</p>
 
 <ul>
-<li>build a static binary</li>
-<li>rely on go networking instead of using the system&rsquo;s</li>
+<li>Build a static binary</li>
+<li>Rely on Go resolvers instead of using the system&rsquo;s</li>
 </ul>
 
-<p>Now that we have the app code what we need is to generate a static binary, with <code>go build</code> this is an easy task, the only thing you should make sure of is the target platform, if you&rsquo;re on a mac for example, as you know docker containers are based on <strong>linux</strong>, so a build for <strong>darwin</strong> will not run inside the container, but this is easily achievable by setting the environment variable <code>GOOS</code> to the value <code>linux</code></p>
+<p>What we need is to generate a static binary, with <code>go build</code> this is an easy task, we should make sure we are building for the correct target platform (<em>if you&rsquo;re on a mac for example</em>), Docker Images are based on <em><strong>linux</strong></em>, so a build for <strong>darwin</strong> will not run inside the container, but this is easily achievable by setting the environment variable <code>GOOS</code> to the value <code>linux</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">GOOS<span style="color:#f92672">=</span>linux go build -o app.bin app.go</code></pre></div>
-<p>But to make sure that our binary is totally static and doesn&rsquo;t have external dependencies, we would have needed to add some flags to the build, like <code>netgo</code> to make sure that the binary is using Go own resolvers instead of relying on the system&rsquo;s, thankfully it&rsquo;s no longer necessary to do as of Go <strong>v1.5</strong> on <em>Unix</em> systems (<em>windows</em>, <em>macos</em> and <em>Plan9</em> do still need this), the fact that our main target is linux(docker container) we don&rsquo;t need to add this flag.</p>
+<p>Also to make sure that our binary is totally static and doesn&rsquo;t have external dependencies, we need to add some flags to the build, like <code>netgo</code> to make sure that the binary is using Go own resolvers instead of relying on the system&rsquo;s, thankfully it&rsquo;s no longer necessary to do as of Go <strong>v1.5</strong> for <em>Unix</em> platforms (<em>windows</em>, <em>macos</em> and <em>Plan9</em> do still need this though), the fact that our main target is linux(docker container) we don&rsquo;t need to add this flag.</p>
 
-<p>What we can do though is set <code>--ldflags</code> <code>-extldflags &quot;-static&quot;</code> to tell the linker to statically compile the dependencies inside the binary.</p>
+<p>What we can do though is set <code>--ldflags</code> <code>-extldflags &quot;-static&quot;</code> to tell the linker to statically compile any dependencies inside the binary.</p>
 
 <p>Run the command</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">GOOS<span style="color:#f92672">=</span>linux go build --ldflags <span style="color:#e6db74">&#39;-extldflags &#34;-static&#34;&#39;</span> -o app.static.bin app.go</code></pre></div>
 <h2 id="build-a-smaller-app-binary">Build a smaller app binary</h2>
 
-<p>Now that we have cross compiled the app and generated an executable binary, let&rsquo;s do a quick check to the size of all the generated binaries.</p>
+<p>We have cross compiled the app and generated an executable binary, let&rsquo;s do a quick check to the size of all the generated binaries.</p>
 
 <p>Run the command</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -lh</code></pre></div>
 <p>On my machine this shows</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-output" data-lang="output">-rwxr-xr-x  1 ezzarghili  staff   6.2M Feb 20 19:14 app.static.bin</code></pre></div>
-<p>Now our main goal it reduce the size of the statically compiled binary, the build flag <code>--ldflags</code> accept some really usefull args that will help us achieve this goal, these are <code>-s -w</code> which allow for stripping symbols table and dwarf data (debug info, <em>The end of the article will have more information this</em>) from the binary file.</p>
+<p>Our main next goal is to reduce the size of the statically compiled binary, the build flag <code>--ldflags</code> accepts some really usefull args that will help us achieve this goal, these are <code>-s -w</code> which allow for stripping <em>symbol table</em> and <em>DWARF</em> information (debug info, <em>The end of the article will have more information on this</em>) from the binary file.</p>
 
 <p>Run the command</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">GOOS<span style="color:#f92672">=</span>linux go build --ldflags <span style="color:#e6db74">&#39;-extldflags &#34;-static&#34; -s -w&#39;</span> -o app.static.small.bin app.go</code></pre></div>
 <p>Let&rsquo;s now check the size of the new genareted binary file</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -lh</code></pre></div>
-<p>My output</p>
+<p>Outputs</p>
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">-rwxr-xr-x  1 ezzarghili  staff   6.2M Feb 20 19:14 app.static.bin
 <span style="display:block;width:100%;background-color:#3c3d38">-rwxr-xr-x  1 ezzarghili  staff   4.6M Feb 20 19:15 app.static.small.bin</span></code></pre></div>
@@ -199,7 +199,7 @@
 
 <p>Download the tool here <a href="https://github.com/upx/upx/releases">github release for upx</a>, or you can build it from source if no binary is available for your platform (<em>for mac users there is a homebrew formula for upx</em>)</p>
 
-<p>Run the command bellow (-9 is the best compression level, you can use others)</p>
+<p>Run the command bellow (-9 is the best compression level available, you can use an other)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">upx -9 -o app.static.small.upx.bin app.static.small.bin</code></pre></div>
 <p>Output</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">        File size         Ratio      Format      Name
@@ -213,13 +213,13 @@
 </span>-rwxr-xr-x  1 ezzarghili  staff   4.6M Feb 20 19:15 app.static.small.bin
 <span style="display:block;width:100%;background-color:#3c3d38">-rwxr-xr-x  1 ezzarghili  staff   1.7M Feb 20 19:15 app.static.small.upx.bin</span></code></pre></div>
 
-<p>Now we got the initial size of our app roughly <strong>~72%</strong> down!! we can now move on.</p>
+<p>At this point we got the initial size of our app roughly <strong>~72%</strong> down!! we can now move on.</p>
 
 <h2 id="create-a-docker-image">Create a docker image</h2>
 
-<p>Now that we have built and compressed our app binary, the next step is to create our docker image hosting the app.</p>
+<p>We have built and compressed our app binary, the next step is to create the Docker Image hosting the app.</p>
 
-<p>We will use the smallest docker image available to us <code>scratch</code> as our app doesn&rsquo;t have any external dependencies.</p>
+<p>We will use the smallest Docker Image available to us <code>scratch</code> as our app doesn&rsquo;t have any external dependencies.</p>
 
 <p>Also the fact the app is a web-service we will need to export the app port, so it can be discovered and be available to the host.</p>
 
@@ -250,7 +250,7 @@
 reading app.static.small.bin: no symbols</code></pre></div>
 <p><code>-w</code> will disable DWARF generation, meaning you no long will be able use debug information with tools like <code>gdb</code> to debug the binary or <code>pprof</code> to profile it, or any other tool that depends on this information be availble in the binary.</p>
 
-<p>Thank you for reading looking forward to write my next post :)</p>    
+<p>Thank you for reading, I am looking forward to writing my next post :)</p>    
         </div>
     </section>
 
