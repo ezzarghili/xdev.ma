@@ -13,15 +13,15 @@ In this post we will go through the process of creating a slim Docker image host
 
 The steps for this will be
 
-- Build a statically compiled binary with no external dependecies
-- Compress the executable generated to reduce the size more
+- Build a statically compiled binary with no external dependencies
+- Compress the binary generated to reduce the size
 - Use a small base docker image, in this case we will go with `scratch`
 
 ## Creating a simple Go app
 
 First we should start by creating our app, not being the focus of this post we will create the simplest app we can.
 
-A good fit is a simple web-service with a single endpoint that accepts an http GET request with a parameter `name` and return a string `"Hello $name"` or just `"Hello world"` if none are set.
+A good fit is a simple web-service with a single endpoint that accepts an http GET request with a parameter `name` and return a text `"Hello $name"` or just `"Hello world"` if none are set.
 
 For example
 
@@ -64,18 +64,18 @@ func hello(resp http.ResponseWriter, req *http.Request) {
 
 First let's go over the steps that we want to do, as our main target is a linux based docker container we will need to cross compile the app if we are in macos/windows, these are the steps
 
-- build a static binary
-- rely on go networking instead of using the system's
+- Build a static binary
+- Rely on Go resolvers instead of using the system's
 
-Now that we have the app code what we need is to generate a static binary, with `go build` this is an easy task, the only thing you should make sure of is the target platform, if you're on a mac for example, as you know docker containers are based on **linux**, so a build for **darwin** will not run inside the container, but this is easily achievable by setting the environment variable `GOOS` to the value `linux`
+What we need is to generate a static binary, with `go build` this is an easy task, we should make sure we are building for the correct target platform (_if you're on a mac for example_), Docker Images are based on _**linux**_, so a build for **darwin** will not run inside the container, but this is easily achievable by setting the environment variable `GOOS` to the value `linux`
 
 ```bash
 GOOS=linux go build -o app.bin app.go
 ```
 
-But to make sure that our binary is totally static and doesn't have external dependencies, we would have needed to add some flags to the build, like `netgo` to make sure that the binary is using Go own resolvers instead of relying on the system's, thankfully it's no longer necessary to do as of Go **v1.5** on _Unix_ systems (_windows_, _macos_ and _Plan9_ do still need this), the fact that our main target is linux(docker container) we don't need to add this flag.
+Also to make sure that our binary is totally static and doesn't have external dependencies, we need to add some flags to the build, like `netgo` to make sure that the binary is using Go own resolvers instead of relying on the system's, thankfully it's no longer necessary to do as of Go **v1.5** for _Unix_ platforms (_windows_, _macos_ and _Plan9_ do still need this though), the fact that our main target is linux(docker container) we don't need to add this flag.
 
-What we can do though is set `--ldflags` `-extldflags "-static"` to tell the linker to statically compile the dependencies inside the binary.
+What we can do though is set `--ldflags` `-extldflags "-static"` to tell the linker to statically compile any dependencies inside the binary.
 
 Run the command
 
@@ -85,7 +85,7 @@ GOOS=linux go build --ldflags '-extldflags "-static"' -o app.static.bin app.go
 
 ## Build a smaller app binary
 
-Now that we have cross compiled the app and generated an executable binary, let's do a quick check to the size of all the generated binaries.
+We have cross compiled the app and generated an executable binary, let's do a quick check to the size of all the generated binaries.
 
 Run the command
 
@@ -99,7 +99,7 @@ On my machine this shows
 -rwxr-xr-x  1 ezzarghili  staff   6.2M Feb 20 19:14 app.static.bin
 ```
 
-Now our main goal it reduce the size of the statically compiled binary, the build flag `--ldflags` accept some really usefull args that will help us achieve this goal, these are `-s -w` which allow for stripping symbols table and dwarf data (debug info, _The end of the article will have more information this_) from the binary file.
+Our main next goal is to reduce the size of the statically compiled binary, the build flag `--ldflags` accepts some really usefull args that will help us achieve this goal, these are `-s -w` which allow for stripping _symbol table_ and _DWARF_ information (debug info, _The end of the article will have more information on this_) from the binary file.
 
 Run the command
 
@@ -113,7 +113,7 @@ Let's now check the size of the new genareted binary file
 ls -lh
 ```
 
-My output
+Outputs
 
 {{<highlight text "hl_lines=2" >}}
 -rwxr-xr-x  1 ezzarghili  staff   6.2M Feb 20 19:14 app.static.bin
@@ -128,7 +128,7 @@ If we believe that the results we got from the build are still not super satisfa
 
 Download the tool here [github release for upx](https://github.com/upx/upx/releases), or you can build it from source if no binary is available for your platform (_for mac users there is a homebrew formula for upx_)
 
-Run the command bellow (-9 is the best compression level, you can use others)
+Run the command bellow (-9 is the best compression level available, you can use an other)
 
 ```bash
 upx -9 -o app.static.small.upx.bin app.static.small.bin
@@ -156,13 +156,13 @@ Ouputs
 -rwxr-xr-x  1 ezzarghili  staff   1.7M Feb 20 19:15 app.static.small.upx.bin
 {{</highlight>}}
 
-Now we got the initial size of our app roughly **~72%** down!! we can now move on.
+At this point we got the initial size of our app roughly **~72%** down!! we can now move on.
 
 ## Create a docker image
 
-Now that we have built and compressed our app binary, the next step is to create our docker image hosting the app.
+We have built and compressed our app binary, the next step is to create the Docker Image hosting the app.
 
-We will use the smallest docker image available to us `scratch` as our app doesn't have any external dependencies.
+We will use the smallest Docker Image available to us `scratch` as our app doesn't have any external dependencies.
 
 Also the fact the app is a web-service we will need to export the app port, so it can be discovered and be available to the host.
 
@@ -217,4 +217,4 @@ reading app.static.small.bin: no symbols
 
 `-w` will disable DWARF generation, meaning you no long will be able use debug information with tools like `gdb` to debug the binary or `pprof` to profile it, or any other tool that depends on this information be availble in the binary.
 
-Thank you for reading looking forward to write my next post :)
+Thank you for reading, I am looking forward to writing my next post :)
