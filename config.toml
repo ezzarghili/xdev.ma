@@ -11,7 +11,7 @@ pygmentsCodeFencesGuessSyntax = true
   subtitle    = "Sharing with simplicity in mind"
   logo = "/img/xdevma.png"
 
-  cover       = "img/xdevma_black_cover.jpg"
+  cover       = "img/xdevma_cover.jpg"
   description = "X Developer Marbles's blog: Sharing with simplicity in mind."
   metaDescription = ""
   googleAnalytics = ""
