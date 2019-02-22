@@ -148,7 +148,7 @@ Let's check again the size of the generated binaries.
 ls -lh
 ```
 
-Ouputs
+Outputs
 
 {{<highlight text "hl_lines=1 3" >}}
 -rwxr-xr-x  1 ezzarghili  staff   6.2M Feb 20 19:14 app.static.bin
